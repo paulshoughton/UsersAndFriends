@@ -14,6 +14,8 @@
 		58432D94254176C700ABD188 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58432D93254176C700ABD188 /* ContentView.swift */; };
 		58432D96254176C700ABD188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58432D95254176C700ABD188 /* Assets.xcassets */; };
 		58432D99254176C700ABD188 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58432D98254176C700ABD188 /* Preview Assets.xcassets */; };
+		58F3B96C2546CA6D0037AAA9 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F3B96B2546CA6D0037AAA9 /* UserRow.swift */; };
+		58F3B96F2546CCA90037AAA9 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F3B96E2546CCA90037AAA9 /* UserDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		58432D95254176C700ABD188 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58432D98254176C700ABD188 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		58432D9A254176C700ABD188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58F3B96B2546CA6D0037AAA9 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		58F3B96E2546CCA90037AAA9 /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 				58432D97254176C700ABD188 /* Preview Content */,
 				581FEC662545772800F32786 /* User.swift */,
 				581FEC6C25459C3C00F32786 /* UserList.swift */,
+				58F3B96B2546CA6D0037AAA9 /* UserRow.swift */,
+				58F3B96E2546CCA90037AAA9 /* UserDetail.swift */,
 				581FEC692545777700F32786 /* Friend.swift */,
 			);
 			path = UsersAndFriends;
@@ -148,8 +154,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				581FEC6D25459C3C00F32786 /* UserList.swift in Sources */,
+				58F3B96F2546CCA90037AAA9 /* UserDetail.swift in Sources */,
 				58432D94254176C700ABD188 /* ContentView.swift in Sources */,
 				58432D92254176C700ABD188 /* UsersAndFriendsApp.swift in Sources */,
+				58F3B96C2546CA6D0037AAA9 /* UserRow.swift in Sources */,
 				581FEC672545772800F32786 /* User.swift in Sources */,
 				581FEC6A2545777700F32786 /* Friend.swift in Sources */,
 			);

@@ -1,30 +1,30 @@
 //
-//  UserList.swift
+//  UserRow.swift
 //  UsersAndFriends
 //
-//  Created by Paul Houghton on 25/10/2020.
+//  Created by Paul Houghton on 26/10/2020.
 //
 
 import SwiftUI
 
-struct UserList: View {
-    var users: [User]
+struct UserRow: View {
+    var user: User
     
     var body: some View {
-        List {
-            ForEach(users, id: \.id) { user in
-                UserRow(user: user)
+        NavigationLink(destination: UserDetail(user: user) ) {
+            VStack(alignment: .leading) {
+                Text("\(user.name)")
+                    .font(.headline)
+                Text("\(user.company)")
+                    .font(.subheadline)
             }
         }
-        .navigationBarTitle(Text("Users"))
-        
     }
+    
 }
 
-struct UserList_Previews: PreviewProvider {
+struct UserRow_Previews: PreviewProvider {
     static var previews: some View {
-        var sampleUsers: [User] = [User]()
-        
         let userPaul = User(
             id: "1",
             isActive: true,
@@ -37,10 +37,8 @@ struct UserList_Previews: PreviewProvider {
             friends: [Friend]()
         )
         
-        sampleUsers.append(userPaul)
-        
-        return NavigationView {
-            UserList(users: sampleUsers)
+        return List {
+            UserRow(user: userPaul)
         }
     }
 }
