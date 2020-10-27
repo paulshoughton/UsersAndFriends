@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+class Users: ObservableObject {
+    @Published var userArray: [User]
+    
+    init(userArray: [User]) {
+        self.userArray = userArray
+    }
+    
+}
+
 struct ContentView: View {
-    @State private var users: [User] = [User]()
+    //@State private var users: [User] = [User]()
+    @ObservedObject var users: Users = Users(userArray: [User]())
         
     var body: some View {
         NavigationView {
@@ -29,9 +39,8 @@ struct ContentView: View {
             if let data = data {
                 if let decodedUsers = try? JSONDecoder().decode([User].self, from: data) {
                     DispatchQueue.main.async {
-                        self.users = decodedUsers
+                        self.users.userArray = decodedUsers
                     }
-                    
                     return
                 }
             }

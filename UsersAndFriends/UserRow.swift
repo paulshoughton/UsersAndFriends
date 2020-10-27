@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct UserRow: View {
+    @ObservedObject var users: Users
     var user: User
     
     var body: some View {
-        NavigationLink(destination: UserDetail(user: user) ) {
+        NavigationLink(destination: UserDetail(users: users, user: user) ) {
             VStack(alignment: .leading) {
                 Text("\(user.name)")
                     .font(.headline)
@@ -25,6 +26,8 @@ struct UserRow: View {
 
 struct UserRow_Previews: PreviewProvider {
     static var previews: some View {
+        let sampleUsers: Users = Users(userArray: [User]())
+
         let userPaul = User(
             id: "1",
             isActive: true,
@@ -37,8 +40,10 @@ struct UserRow_Previews: PreviewProvider {
             friends: [Friend]()
         )
         
+        sampleUsers.userArray.append(userPaul)
+        
         return List {
-            UserRow(user: userPaul)
+            UserRow(users: sampleUsers, user: userPaul)
         }
     }
 }

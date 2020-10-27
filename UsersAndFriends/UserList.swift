@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct UserList: View {
-    var users: [User]
+    @ObservedObject var users: Users
     
     var body: some View {
         List {
-            ForEach(users, id: \.id) { user in
-                UserRow(user: user)
+            ForEach(users.userArray, id: \.id) { user in
+                UserRow(users: users, user: user)
             }
         }
         .navigationBarTitle(Text("Users"))
@@ -23,7 +23,7 @@ struct UserList: View {
 
 struct UserList_Previews: PreviewProvider {
     static var previews: some View {
-        var sampleUsers: [User] = [User]()
+        let sampleUsers: Users = Users(userArray: [User]())
         
         let userPaul = User(
             id: "1",
@@ -37,7 +37,7 @@ struct UserList_Previews: PreviewProvider {
             friends: [Friend]()
         )
         
-        sampleUsers.append(userPaul)
+        sampleUsers.userArray.append(userPaul)
         
         return NavigationView {
             UserList(users: sampleUsers)

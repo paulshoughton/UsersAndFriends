@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserDetail: View {
+    @ObservedObject var users: Users
     var user: User
     
     var body: some View {
@@ -19,14 +20,30 @@ struct UserDetail: View {
                 .font(.headline)
             Text("\(user.address)")
             Text("\(user.about)")
-            Spacer()
-            Section(header: Text("Friends")) {
-                List {
-                    ForEach(user.friends) { friend in
-                        Text("\(friend.name)")
+            Text("Friends")
+                .font(.headline)
+            List {
+                ForEach(user.friends) {friend in
+                    if let userFriend = users.userArray.first(where: {$0.id == friend.id}) {
+                        
+                        VStack(alignment: .leading)  {
+                            NavigationLink(destination: UserDetail(users: users, user: userFriend)) {
+                                Text("\(friend.name)")
+                                    .font(.headline)
+                                Text("\(userFriend.company)")
+                            }
+                        }
+                    }
+                    else {
+                        VStack(alignment: .leading) {
+                            Text("\(friend.name)")
+                                .font(.headline)
+                        }
                     }
                 }
             }
+            .padding(0)
+            
         }
         .navigationBarTitle("\(user.name)", displayMode: .inline)
     }
@@ -34,6 +51,8 @@ struct UserDetail: View {
 
 struct UserDetail_Previews: PreviewProvider {
     static var previews: some View {
+        let sampleUsers: Users = Users(userArray: [User]())
+        
         let userPaul = User(
             id: "1",
             isActive: true,
@@ -43,11 +62,26 @@ struct UserDetail_Previews: PreviewProvider {
             email: "paul.houghton@bentley.com",
             address: "221B Baker Street",
             about: "A super detective.",
+            friends: [Friend](arrayLiteral: Friend(id: "2", name: "Shane Donnelly"))
+        )
+        
+        let userShane = User(
+            id: "2",
+            isActive: true,
+            name: "Shane Donnelly",
+            age: 45,
+            company: "Bentley Systems",
+            email: "shane.donnelly@bentley.com",
+            address: "221A Baker Street",
+            about: "A super detective assistant.",
             friends: [Friend]()
         )
         
+        sampleUsers.userArray.append(userPaul)
+        sampleUsers.userArray.append(userShane)
+        
         return NavigationView {
-            UserDetail(user: userPaul)
+            UserDetail(users: sampleUsers, user: userPaul)
         }
     }
 }
