@@ -12,69 +12,80 @@ struct UserDetail: View {
     var user: User
     
     var body: some View {
-        VStack(alignment: .leading) {
-
-            Section {
-                Text("\(user.about)")
-                    .padding(.top)
+        ScrollView {
+            VStack(alignment: .leading) {
                 
-                Link("\(user.email)", destination: URL(string: "mailto:\(user.email)")!)
+                Section {
+                    Text("\(user.about)")
+                        .padding(.top)
+                    
+                    Link("\(user.email)", destination: URL(string: "mailto:\(user.email)")!)
+                    
+                    HStack {
+                        Text("Age")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(user.age)")
+                    }
+                    
+                    HStack {
+                        Text("Company")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(user.company)")
+                    }
+                    
+                    HStack {
+                        Text("Address")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(user.address)")
+                    }
+                }
+                .padding([.leading, .trailing, .bottom], /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 
                 HStack {
-                    Text("Age")
-                        .font(.headline)
+                    Text("Friends")
+                        .font(.title2)
+                        .padding(.all)
                     Spacer()
-                    Text("\(user.age)")
                 }
+                .background(Color(red: 0.9, green: 0.9, blue: 0.9))
                 
-                HStack {
-                    Text("Company")
-                        .font(.headline)
-                    Spacer()
-                    Text("\(user.company)")
-                }
-                
-                HStack {
-                    Text("Address")
-                        .font(.headline)
-                    Spacer()
-                    Text("\(user.address)")
-                }
-            }
-            .padding([.leading, .trailing, .bottom], /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-            
-            HStack {
-                Text("Friends")
-                    .font(.title2)
-                    .padding(.all)
-                Spacer()
-            }
-            .background(Color(.lightGray))
-            
-            Section {
-
-                List {
+                Section {
                     ForEach(user.friends) {friend in
                         if let userFriend = users.userArray.first(where: {$0.id == friend.id}) {
                             
-                            VStack(alignment: .leading)  {
+                            VStack {
                                 NavigationLink(destination: UserDetail(users: users, user: userFriend)) {
-                                    Text("\(friend.name)")
-                                        .font(.headline)
-                                    Text("\(userFriend.company)")
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .leading)  {
+                                            
+                                            Text("\(friend.name)")
+                                                .font(.headline)
+                                            Text("\(userFriend.company)")
+                                        }
+                                        Spacer()
+                                        Image(systemName: "chevron.forward")
+                                            .foregroundColor(.gray)
+                                    }
+                                    .foregroundColor(.primary)
                                 }
+                                Divider()
                             }
+                            
                         }
                         else {
                             VStack(alignment: .leading) {
                                 Text("\(friend.name)")
                                     .font(.headline)
+                                Divider()
                             }
                         }
                     }
                 }
+                .padding([.leading, .trailing])
             }
-            .padding()
         }
         .navigationBarTitle("\(user.name)", displayMode: .inline)
     }
