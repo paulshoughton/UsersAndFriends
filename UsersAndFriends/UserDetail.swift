@@ -12,38 +12,69 @@ struct UserDetail: View {
     var user: User
     
     var body: some View {
-        VStack {
-            Text("Age \(user.age)")
-            Text("\(user.company)")
-            Text("\(user.email)")
-            Text("Address")
-                .font(.headline)
-            Text("\(user.address)")
-            Text("\(user.about)")
-            Text("Friends")
-                .font(.headline)
-            List {
-                ForEach(user.friends) {friend in
-                    if let userFriend = users.userArray.first(where: {$0.id == friend.id}) {
-                        
-                        VStack(alignment: .leading)  {
-                            NavigationLink(destination: UserDetail(users: users, user: userFriend)) {
-                                Text("\(friend.name)")
-                                    .font(.headline)
-                                Text("\(userFriend.company)")
+        VStack(alignment: .leading) {
+
+            Section {
+                Text("\(user.about)")
+                    .padding(.top)
+                
+                Link("\(user.email)", destination: URL(string: "mailto:\(user.email)")!)
+                
+                HStack {
+                    Text("Age")
+                        .font(.headline)
+                    Spacer()
+                    Text("\(user.age)")
+                }
+                
+                HStack {
+                    Text("Company")
+                        .font(.headline)
+                    Spacer()
+                    Text("\(user.company)")
+                }
+                
+                HStack {
+                    Text("Address")
+                        .font(.headline)
+                    Spacer()
+                    Text("\(user.address)")
+                }
+            }
+            .padding([.leading, .trailing, .bottom], /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            
+            HStack {
+                Text("Friends")
+                    .font(.title2)
+                    .padding(.all)
+                Spacer()
+            }
+            .background(Color(.lightGray))
+            
+            Section {
+
+                List {
+                    ForEach(user.friends) {friend in
+                        if let userFriend = users.userArray.first(where: {$0.id == friend.id}) {
+                            
+                            VStack(alignment: .leading)  {
+                                NavigationLink(destination: UserDetail(users: users, user: userFriend)) {
+                                    Text("\(friend.name)")
+                                        .font(.headline)
+                                    Text("\(userFriend.company)")
+                                }
                             }
                         }
-                    }
-                    else {
-                        VStack(alignment: .leading) {
-                            Text("\(friend.name)")
-                                .font(.headline)
+                        else {
+                            VStack(alignment: .leading) {
+                                Text("\(friend.name)")
+                                    .font(.headline)
+                            }
                         }
                     }
                 }
             }
-            .padding(0)
-            
+            .padding()
         }
         .navigationBarTitle("\(user.name)", displayMode: .inline)
     }
