@@ -5,10 +5,14 @@
 //  Created by Paul Houghton on 22/10/2020.
 //
 
+import CoreData
 import SwiftUI
 
 class Users: ObservableObject {
     @Published var userArray: [User]
+    
+//    @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
+
     
     init(userArray: [User]) {
         self.userArray = userArray

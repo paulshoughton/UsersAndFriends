@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import CoreData
 
-struct User: Codable, Identifiable {
+class User: Codable, Identifiable {
     var id: String
     var isActive: Bool
     var name: String
@@ -19,5 +20,16 @@ struct User: Codable, Identifiable {
     
     var friends: [Friend]
     
-    
+    init(id: String, isActive: Bool, name: String, age: Int, company: String, email: String, address: String, about: String, friends: [Friend]) {
+        self.id = id
+        self.isActive = isActive
+        self.name = name
+        self.age = age
+        self.company = company
+        self.email = email
+        self.address = address
+        self.about = about
+        
+        self.friends = friends
+    }
 }
